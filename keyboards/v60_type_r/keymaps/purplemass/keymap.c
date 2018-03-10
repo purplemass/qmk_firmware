@@ -38,6 +38,8 @@ enum macros {
   mNK8,
   mNK9,
   mNK0,
+  mL_S,
+  mL_E,
 };
 
 #define _______ KC_TRNS
@@ -114,10 +116,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          _______,  XXXXX,    BL_INC,  BL_TOGG, BL_DEC,  _______, KC_VOLD, KC_VOLU, KC_MUTE, KC_END,  KC_PGDN, KC_DOWN,  KC_PGUP,      XXXXX,  \
     // |--------------------------------------------------------------------------------------------------------------------------------------|
     // |          |          |          |                                                         |          |          |          |          |
-    // |          |          |          |                                                         |          |          | Page     |          |
-    // |          |          |          |                                                         |          | Left     | Down     | Right    |
+    // |          |          |          |                                                         |          | Line     | Page     | Line     |
+    // |          |          |          |                                                         |          | Start    | Down     | End      |
     // '--------------------------------------------------------------------------------------------------------------------------------------'
-         M(mNK1),   _______,  TG_ARROWS,  _______,                                                 _______,    KC_LEFT,   KC_PGDN,   KC_RIGHT),
+         M(mNK1),   _______,  TG_ARROWS,  _______,                                                 _______,    M(mL_S),   KC_PGDN,   M(mL_E)),
     // '--------------------------------------------------------------------------------------------------------------------------------------'
 
   [_2_MACROS] = KEYMAP(
@@ -287,6 +289,32 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case mNK0: {
             if (record->event.pressed) {
                 SEND_STRING(SS_LGUI("10"));
+            }
+            return false;
+            break;
+        }
+
+        // TODO: mL_S/mL_E not 100% right but they do the job
+
+        case mL_S: {
+            if (record->event.pressed) {
+              register_code(KC_LGUI);
+              register_code(KC_LEFT);
+            } else {
+              unregister_code(KC_LEFT);
+              unregister_code(KC_LGUI);
+            }
+            return false;
+            break;
+        }
+
+        case mL_E: {
+            if (record->event.pressed) {
+              register_code(KC_LGUI);
+              register_code(KC_RIGHT);
+            } else {
+              unregister_code(KC_LEFT);
+              unregister_code(KC_LGUI);
             }
             return false;
             break;
