@@ -41,6 +41,10 @@ enum macros {
 
 #define _______ KC_TRNS
 #define XXXXX KC_NO
+#define MOD_LEFT RGUI_T(KC_LEFT)
+#define MOD_DOWN ALT_T(KC_DOWN)
+#define MOD_RIGHT RCTL_T(KC_RIGHT)
+#define MOD_UP RSFT_T(KC_UP)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -67,16 +71,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          MO(1),          KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT, \
     // |--------------------------------------------------------------------------------------------------------------------------------------|
     // |          |░░░░░░░░|        |        |        |        |        |        |        | <      | >      | ?      |               |░░░░░░░░|
-    // |          |░░░░░░░░|        |        |        |        |        |        |        |        |        |        |               |░░░░░░░░|
-    // | Shift    |░░░░░░░░| Z      | X      | C      | V      | B      | N      | M      | ,      | .      | /      | Shift(Up)     |░░░░░░░░|
+    // |          |░░░░░░░░|        |        |        |        |        |        |        |        |        |        | MOD           |░░░░░░░░|
+    // | Shift    |░░░░░░░░| Z      | X      | C      | V      | B      | N      | M      | ,      | .      | /      | Shift         |░░░░░░░░|
     // |--------------------------------------------------------------------------------------------------------------------------------------|
-         KC_LSFT,  XXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, RSFT_T(KC_UP), XXXXX, \
+         KC_LSFT,  XXXXX,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MOD_UP,        XXXXX, \
     // |--------------------------------------------------------------------------------------------------------------------------------------|
     // |          |          |          |                                                         |          |          |          |          |
-    // |          |          |          |                                                         |          |          |          |          |
+    // |          |          |          |                                                         |          | MOD      | MOD      | MOD      |
     // | Ctrl     | Win      | Alt      | Space                                                   | FnO      | Left     | Down     | Right    |
     // '--------------------------------------------------------------------------------------------------------------------------------------'
-         KC_LCTL,   KC_LALT,   KC_LGUI,   LT(_2_MACROS, KC_SPC),                                    MO(1),     KC_LEFT,   KC_DOWN,   KC_RIGHT),
+         KC_LCTL,   KC_LALT,   KC_LGUI,   LT(_2_MACROS, KC_SPC),                                    MO(1),     MOD_LEFT,  MOD_DOWN,  MOD_RIGHT),
     // '--------------------------------------------------------------------------------------------------------------------------------------'
 
   [_1_FUNCTION] = KEYMAP(
